@@ -1,15 +1,58 @@
 <script setup>
-import axios from 'axios';
+//import axios from 'axios';
 import { ref, watchEffect } from 'vue'
-
+import { Client } from '@stomp/stompjs';
 
 const items = ref(null)
 
+
+
 watchEffect(async () => {
-  axios.get("/downloaded").then(res => {
-    items.value = res.data;
-  })
+  const stompClient = new Client({
+    brokerURL: 'ws://localhost:3222/ws',
+    debug: (str) => {
+      console.log(str)
+    },
+    onConnect: () => {
+      stompClient.subscribe('/topic/downloaded', (message) => {
+        console.log(message);
+        items.value = JSON.parse(message.body);
+      });
+    }
+  }
+
+  );
+
+
+  stompClient.activate();
 })
+
+// $(function () {
+//     $("form").on('submit', (e) => e.preventDefault());
+//     $( "#connect" ).click(() => connect());
+//     $( "#disconnect" ).click(() => disconnect());
+//     $( "#send" ).click(() => sendName());
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function filesize(size) {
   let kb = 1024;
@@ -22,8 +65,6 @@ function filesize(size) {
   } else {
     return (size / kb).toFixed(2) + "K"
   }
-
-
 }
 
 

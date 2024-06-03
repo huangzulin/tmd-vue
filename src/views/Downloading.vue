@@ -1,14 +1,29 @@
 <script setup>
 import axios from 'axios';
 import { ref, watchEffect } from 'vue'
+import { Client } from '@stomp/stompjs';
 
 
 const items = ref(null)
 
 watchEffect(async () => {
-  axios.get("/downloading").then(res => {
-    items.value = res.data;
-  })
+  const stompClient = new Client({
+    brokerURL: 'ws://localhost:3222/ws',
+    debug: (str) => {
+      console.log(str)
+    },
+    onConnect: () => {
+      stompClient.subscribe('/topic/downloading', (message) => {
+        console.log(message);
+        items.value = JSON.parse(message.body);
+      });
+    }
+  }
+
+  );
+
+
+  stompClient.activate();
 })
 
 function filesize(size) {
