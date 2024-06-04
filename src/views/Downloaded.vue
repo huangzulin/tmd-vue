@@ -72,7 +72,7 @@ function filesize(size) {
 <template>
   <el-container>
     <Aside />
-    <div>
+    <div style="width: 100%;">
       <div class="item" v-for="x in items">
         <div class="field_id">
           <div>{{ x.id }}</div>

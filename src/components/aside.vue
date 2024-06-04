@@ -1,12 +1,24 @@
 <script setup>
 
+import axios from 'axios';
+import router from '@/router';
 import { ref } from 'vue'
 
-var isCollapse = ref(true)
+
+const isCollapse = ref(true)
 
 function handleOpen() {
-
+    isCollapse.value = !isCollapse.value
 }
+
+
+function logout() {
+    axios.post("/logout").then(res => {
+        localStorage.removeItem("phone");
+        router.push({ path: "login" })
+    })
+}
+
 
 </script>
 
@@ -26,6 +38,7 @@ function handleOpen() {
                         <RouterLink to="/downloaded">已完成</RouterLink>
                     </el-menu-item>
                     <el-menu-item index="2">设置</el-menu-item>
+                    <el-menu-item index="3" @click="logout">退出登录</el-menu-item>
                 </el-menu>
             </el-aside>
         </el-container>
