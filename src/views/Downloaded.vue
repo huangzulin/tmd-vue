@@ -2,6 +2,7 @@
 //import axios from 'axios';
 import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
+import Aside from "../components/aside.vue";
 
 const items = ref(null)
 
@@ -10,12 +11,8 @@ const items = ref(null)
 watchEffect(async () => {
   const stompClient = new Client({
     brokerURL: 'ws://localhost:3222/ws',
-    debug: (str) => {
-      console.log(str)
-    },
     onConnect: () => {
       stompClient.subscribe('/topic/downloaded', (message) => {
-        console.log(message);
         items.value = JSON.parse(message.body);
       });
     }
@@ -73,32 +70,28 @@ function filesize(size) {
 </script>
 
 <template>
-  <div>
-
-    <div class="item" v-for="x in items">
-      <div class="field_id">
-        <div>{{ x.id }}</div>
-      </div>
-      <div class="content">
-        <div style="">
-          <div class="filename">{{ x.filename }}</div>
+  <el-container>
+    <Aside />
+    <div>
+      <div class="item" v-for="x in items">
+        <div class="field_id">
+          <div>{{ x.id }}</div>
         </div>
-        <div>
-          <el-progress style="width: 100%;" :text-inside="true" :stroke-width="18" :percentage="x.progress"
-            status="success" />
-        </div>
-        <div style="">
-          <div class="date">{{ x.createTime }}</div>
-          <div class="size">
-            <div v-if="x.downloadedSize != x.fileSize">{{ filesize(x.downloadedSize) }}/</div> {{ filesize(x.fileSize)
-            }}
+        <div class="content">
+          <div style="">
+            <div class="filename">{{ x.filename }}</div>
+          </div>
+          <div style="">
+            <div class="date">{{ x.createTime }}</div>
+            <div class="size">
+              <div v-if="x.downloadedSize != x.fileSize">{{ filesize(x.downloadedSize) }}/</div> {{ filesize(x.fileSize)
+              }}
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-
-  </div>
+  </el-container>
 </template>
 
 <style scoped>
