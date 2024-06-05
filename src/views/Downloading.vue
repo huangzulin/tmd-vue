@@ -5,7 +5,7 @@ import Aside from "../components/aside.vue";
 import router from '@/router';
 import { ElMessage } from 'element-plus';
 
-const api_host = process.env.API_HOST;
+const api_host = import.meta.env.API_HOST;
 
 var phone = localStorage.getItem("phone")
 if (!phone) {

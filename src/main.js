@@ -15,7 +15,7 @@ app.use(ElementPlus)
 
 app.use(router)
 app.use(VueAxios, axios)
-const api_host = process.env.API_HOST;
+const api_host = import.meta.env.API_HOST;
 app.axios.defaults.baseURL = api_host || "http://localhost:3222"
 app.provide('axios', app.config.globalProperties.axios)
 app.mount('#app')

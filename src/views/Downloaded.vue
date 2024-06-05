@@ -4,7 +4,7 @@ import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
 import Aside from "../components/aside.vue";
 
-const api_host = process.env.API_HOST;
+const api_host = import.meta.env.API_HOST;
 
 const items = ref(null)
 
