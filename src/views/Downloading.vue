@@ -5,6 +5,7 @@ import Aside from "../components/aside.vue";
 import router from '@/router';
 import { ElMessage } from 'element-plus';
 
+const api_host = process.env.API_HOST;
 
 var phone = localStorage.getItem("phone")
 if (!phone) {
@@ -19,7 +20,7 @@ const items = ref(null)
 
 watchEffect(async () => {
   const stompClient = new Client({
-    brokerURL: 'ws://localhost:3222/ws',
+    brokerURL: 'ws://' + (api_host || 'localhost:3222') + '/ws',
     onConnect: () => {
       stompClient.subscribe('/topic/downloading', (message) => {
         items.value = JSON.parse(message.body);
