@@ -59,7 +59,6 @@ function filesize(size) {
   <el-container>
     <Aside />
     <el-container>
-      <el-header>下载速度</el-header>
       <el-main>
         <div>
           <div class="item" v-for="x in items">

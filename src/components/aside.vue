@@ -37,7 +37,6 @@ function logout() {
                     <el-menu-item index="2">
                         <RouterLink to="/downloaded">已完成</RouterLink>
                     </el-menu-item>
-                    <el-menu-item index="2">设置</el-menu-item>
                     <el-menu-item index="3" @click="logout">退出登录</el-menu-item>
                 </el-menu>
             </el-aside>
