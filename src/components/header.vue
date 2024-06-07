@@ -24,7 +24,8 @@ function logout() {
 
 
 <template>
-    <div style="display: flex; flex-direction: column; justify-content: flex-end; padding: 0.2rem 0; width: 100%; border: 1px solid var(--el-border-color);">
+    <div
+        style="display: flex; flex-direction: column; justify-content: flex-end; padding: 0.2rem 0; width: 100%; border: 1px solid var(--el-border-color);">
         <div class="name">{{ me.firstName + ' ' + me.lastName }}</div>
         <div style="display: flex; justify-content: end;">
             <div class="phone">TEL:{{ me.phoneNumber }}</div>
