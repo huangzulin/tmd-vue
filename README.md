@@ -3,7 +3,7 @@ Telegram Media Downloader 的前端页面。结合   [huangzulin/tmd](https://gi
 
 ### 使用
 ``` shell
-docker run --name tmd-vue -d  --restart=always -p 3223:8080 huangzulin/tmd-vue
+docker run --name tmd-vue -d  --restart=always -p 3223:80 huangzulin/tmd-vue
 ```
 
 ## 安装依赖
