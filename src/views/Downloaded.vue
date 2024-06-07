@@ -46,7 +46,8 @@ function filesize(size) {
 
 <template>
   <Header />
-  <Aside />
+  <el-container>
+    <Aside />
     <div style="width: 100%;">
       <div class="item" v-for="x in items">
         <div class="field_id">
@@ -66,6 +67,7 @@ function filesize(size) {
         </div>
       </div>
     </div>
+  </el-container>
 </template>
 
 <style scoped>
