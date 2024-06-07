@@ -2,6 +2,7 @@
 import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
 import Aside from "../components/aside.vue";
+import Header from "../components/header.vue";
 import router from '@/router';
 import { ElMessage } from 'element-plus';
 
@@ -55,10 +56,11 @@ function filesize(size) {
 </script>
 
 <template>
-
+  <Header />
   <el-container>
     <Aside />
-    <el-container>
+    <el-container >
+
       <el-main>
         <div>
           <div class="item" v-for="x in items">
@@ -67,7 +69,7 @@ function filesize(size) {
             </div>
             <div class="content">
               <div style="">
-                <div class="filename">{{ x.filename }}</div>
+                <div class="filename">{{ x.caption || x.filename }}</div>
               </div>
               <div>
                 <el-progress style="width: 100%;" :text-inside="true" :stroke-width="18"

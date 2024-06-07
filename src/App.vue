@@ -13,15 +13,11 @@ function handleOpen() {
 
 
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-container>
-        <el-main>
-          <RouterView />
-        </el-main>
-      </el-container>
+  <el-container style="height: 100%;">
+      <el-main style="display: flex; flex-flow: column; height: 100%">
+        <RouterView />
+      </el-main>
     </el-container>
-  </div>
 </template>
 
 <style scoped>

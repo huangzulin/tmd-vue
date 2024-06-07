@@ -3,7 +3,7 @@
 import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
 import Aside from "../components/aside.vue";
-
+import Header from "../components/header.vue";
 const api_host = import.meta.env.API_HOST;
 
 const items = ref(null)
@@ -26,32 +26,6 @@ watchEffect(async () => {
   stompClient.activate();
 })
 
-// $(function () {
-//     $("form").on('submit', (e) => e.preventDefault());
-//     $( "#connect" ).click(() => connect());
-//     $( "#disconnect" ).click(() => disconnect());
-//     $( "#send" ).click(() => sendName());
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function filesize(size) {
   let kb = 1024;
@@ -68,10 +42,10 @@ function filesize(size) {
 
 
 
-
 </script>
 
 <template>
+  <Header />
   <el-container>
     <Aside />
     <div style="width: 100%;">
