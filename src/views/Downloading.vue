@@ -6,7 +6,7 @@ import Header from "../components/header.vue";
 import router from '@/router';
 import { ElMessage } from 'element-plus';
 
-const api_host = import.meta.env.API_HOST;
+const api_host = import.meta.env.VUE_APP_BASE_API;
 
 var phone = localStorage.getItem("phone")
 if (!phone) {
