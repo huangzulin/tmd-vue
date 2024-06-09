@@ -11,7 +11,7 @@ const items = ref(null)
 
 watchEffect(async () => {
   const stompClient = new Client({
-    brokerURL: 'ws://' + (`${location.hostname}:3222`) + '/ws',
+    brokerURL: 'ws://' + (`${document.location.hostname}:3222`) + '/ws',
     onConnect: () => {
       stompClient.subscribe('/topic/downloaded', (message) => {
         items.value = JSON.parse(message.body);

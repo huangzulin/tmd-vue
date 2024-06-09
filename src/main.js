@@ -15,6 +15,6 @@ app.use(ElementPlus)
 
 app.use(router)
 app.use(VueAxios, axios)
-app.axios.defaults.baseURL = `http://${location.hostname}:3222`
+app.axios.defaults.baseURL = `http://${document.location.hostname}:3222`
 app.provide('axios', app.config.globalProperties.axios)
 app.mount('#app')
