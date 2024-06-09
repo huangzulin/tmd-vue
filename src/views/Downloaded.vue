@@ -4,7 +4,6 @@ import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
 import Aside from "../components/aside.vue";
 import Header from "../components/header.vue";
-const api_host = import.meta.env.VUE_APP_BASE_API;
 
 const items = ref(null)
 
@@ -12,7 +11,7 @@ const items = ref(null)
 
 watchEffect(async () => {
   const stompClient = new Client({
-    brokerURL: 'ws://' + (api_host || 'localhost:3222') + '/ws',
+    brokerURL: 'ws://' + (`${location.hostname}:3222`) + '/ws',
     onConnect: () => {
       stompClient.subscribe('/topic/downloaded', (message) => {
         items.value = JSON.parse(message.body);
