@@ -11,5 +11,7 @@ RUN npm run build
 FROM nginx:alpine as production-stage
 ENV VUE_APP_BASE_API = 'localhost:3222'
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
+COPY docker/nginx/prod.conf /temp/prod.conf
+RUN envsubst /app < /temp/prod.conf > /etc/nginx/conf.d/default.conf
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
