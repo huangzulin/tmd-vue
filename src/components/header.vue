@@ -9,6 +9,10 @@ const me = ref({})
 watchEffect(() => {
     axios.get("/me").then(res => {
         me.value = res.data
+        console.log(res.data)
+        if (!res.data) {
+            router.push({ path: "login" })
+        }
     })
 })
 

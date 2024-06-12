@@ -3,19 +3,6 @@ import { ref, watchEffect } from 'vue'
 import { Client } from '@stomp/stompjs';
 import Aside from "../components/aside.vue";
 import Header from "../components/header.vue";
-import router from '@/router';
-import { ElMessage } from 'element-plus';
-
-const api_host = import.meta.env.VUE_APP_BASE_API;
-
-var phone = localStorage.getItem("phone")
-if (!phone) {
-  ElMessage({
-    message: "请进行登录！",
-    type: "warning"
-  })
-  router.push({ path: 'login' })
-}
 
 const items = ref(null)
 

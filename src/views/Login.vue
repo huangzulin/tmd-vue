@@ -2,53 +2,61 @@
 import axios from 'axios';
 import { ref, reactive, watchEffect } from 'vue'
 import { ElMessage } from 'element-plus'
+import { Client } from '@stomp/stompjs';
+import QrcodeVue from 'qrcode.vue'
 import router from '@/router';
 
-const form = reactive({
-    phone: '',
-    code: '',
-})
-
-const disabled = ref(false)
+const qrcode = ref("")
 
 
 
 watchEffect(async () => {
 
-    axios.get("/phone").then(res => {
-        console.log(res.data)
-        if (res.data) {
-            form.phone = res.data;
-            disabled.value = true;
-            sendCode();
+    var client1 = new Client({
+        brokerURL: 'ws://' + (`${document.location.hostname}:3222`) + '/ws',
+        onConnect: () => {
+            client1.subscribe('/topic/qrcode', (message) => {
+                console.log(message)
+                qrcode.value = message.body;
+            });
         }
-
     })
 
+    var client2 = new Client({
+        brokerURL: 'ws://' + (`${document.location.hostname}:3222`) + '/ws',
+        onConnect: () => {
+            client2.subscribe('/topic/auth', (message) => {
+                if (message.body == "ok") {
+                    router.push({ path: "downloading" })
+                }
+            });
+        }
+    })
+
+    client1.activate();
+    client2.activate();
 })
 
-
-function sendCode() {
-    axios.post("/sendCode", { phone: form.phone }).then(res => {
-        ElMessage({
-            message: '请查收验证码！',
-            type: 'success',
-        })
-    })
-}
 
 
 function login() {
     axios.post("/login", { phone: form.phone, code: form.code }).then(res => {
 
-        ElMessage({
-            message: '登录成功！',
-            type: 'success',
-        })
+        console.log(res)
+        if ("ok" == res.data) {
+            localStorage.setItem("phone", form.phone)
 
-        localStorage.setItem("phone", form.phone)
-
-        router.push({ path: 'downloading' })
+            ElMessage({
+                message: '登录成功！',
+                type: 'success',
+            })
+            //router.push({ path: 'downloading' })
+        } else {
+            ElMessage({
+                message: res.data.message,
+                type: 'error',
+            })
+        }
 
     })
 }
@@ -58,19 +66,9 @@ function login() {
 </script>
 
 <template>
-    <el-form label-position="top" label-width="auto" :model="form" style="max-width: 600px">
-        <el-form-item label="手机号码">
-            <el-input v-model="form.phone" :disabled="disabled" />
-        </el-form-item>
-        <el-form-item label="验证码">
-            <el-input v-model="form.code" style="width: 8rem; margin-right: 2rem" />
-            <el-button type="primary" @click="sendCode" v-if="!disabled">发送验证码</el-button>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="login">登录</el-button>
-        </el-form-item>
-
-    </el-form>
+    <div>
+        <qrcode-vue :value="qrcode"></qrcode-vue>
+    </div>
 </template>
 
 <style scoped></style>
