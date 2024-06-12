@@ -27,6 +27,10 @@ watchEffect(async () => {
         onConnect: () => {
             client2.subscribe('/topic/auth', (message) => {
                 if (message.body == "ok") {
+                    ElMessage({
+                        message: '登录成功！',
+                        type: 'success',
+                    })
                     router.push({ path: "downloading" })
                 }
             });
@@ -36,32 +40,6 @@ watchEffect(async () => {
     client1.activate();
     client2.activate();
 })
-
-
-
-function login() {
-    axios.post("/login", { phone: form.phone, code: form.code }).then(res => {
-
-        console.log(res)
-        if ("ok" == res.data) {
-            localStorage.setItem("phone", form.phone)
-
-            ElMessage({
-                message: '登录成功！',
-                type: 'success',
-            })
-            //router.push({ path: 'downloading' })
-        } else {
-            ElMessage({
-                message: res.data.message,
-                type: 'error',
-            })
-        }
-
-    })
-}
-
-
 
 </script>
 
