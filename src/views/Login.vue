@@ -44,7 +44,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-    <div>
+    <div v-if="qrcode">
         <qrcode-vue :value="qrcode"></qrcode-vue>
     </div>
 </template>
