@@ -44,9 +44,13 @@ watchEffect(async () => {
 </script>
 
 <template>
-    <div v-if="qrcode">
+    <div>
+        <div>请使用 Telegram 扫码授权登录</div>
+        <div v-if="qrcode">
         <qrcode-vue :value="qrcode"></qrcode-vue>
     </div>
+    </div>
+    
 </template>
 
 <style scoped></style>
