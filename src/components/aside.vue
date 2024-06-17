@@ -54,6 +54,7 @@ function handleOpen() {
 
     .link{
         text-align: center;
+        padding: 0.3rem 0;
     }
 
     .menu-ul {
