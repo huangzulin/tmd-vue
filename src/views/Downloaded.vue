@@ -45,7 +45,7 @@ function filesize(size) {
 
 <template>
   <Header />
-  <el-container>
+  <div class="main">
     <Aside />
     <div style="width: 100%;">
       <div class="item" v-for="x in items">
@@ -66,14 +66,14 @@ function filesize(size) {
         </div>
       </div>
     </div>
-  </el-container>
+  </div>
 </template>
 
 <style scoped>
 .item {
   display: flex;
   border: 1px dotted gray;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
   padding: 0.5rem;
   border-radius: 0.5 rem;
 }
@@ -102,9 +102,15 @@ function filesize(size) {
 
 @media (min-width: 1024px) {
 
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.main {
+  display: flex;
+}
+}
+
+@media (max-width: 1023px) {
+.main {
+  display: flex;
+  flex-direction: column;
+}
 }
 </style>

@@ -1,29 +1,30 @@
 <script setup>
 
-import { ref } from 'vue'
-
-var isCollapse = ref(true)
-
-function handleOpen() {
-
-}
-
 </script>
 
 
 
 <template>
   <el-container style="height: 100%;">
-      <el-main style="display: flex; flex-flow: column; height: 100%">
+      <el-main style="display: flex; flex-flow: column; height: 100%;">
         <RouterView />
       </el-main>
     </el-container>
 </template>
 
 <style scoped>
-@media (min-width: 1024px) {}
 
-.menu-ul {
-  width: 80px;
+@media (min-width: 1024px) {
+
+.main {
+  display: flex;
+}
+}
+
+@media (max-width: 1023px) {
+.main {
+  display: flex;
+  flex-direction: column;
+}
 }
 </style>

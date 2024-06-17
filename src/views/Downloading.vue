@@ -44,41 +44,36 @@ function filesize(size) {
 
 <template>
   <Header />
-  <el-container>
+  <div class="main">
     <Aside />
-    <el-container>
-
-      <el-main>
-        <div>
-          <div class="item" v-for="x in items">
-            <div class="field_id">
-              <div>{{ x.id }}</div>
-            </div>
-            <div class="content">
-              <div style="">
-                <div class="filename">{{ x.caption || x.filename }}</div>
-              </div>
-              <div>
-                <el-progress style="width: 100%;" :text-inside="true" :stroke-width="18"
-                  :percentage="new Number(x.progress.toFixed(2))" />
-              </div>
-              <div style="">
-                <div class="date">{{ x.createTime }}</div>
-                <div>{{ filesize(x.downloadBytePerSec) }}/s </div>
-                <div class="size">
-                  <div v-if="x.downloadedSize != x.fileSize">{{ filesize(x.downloadedSize) }}/</div> {{
-            filesize(x.fileSize)
-          }}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+    <div>
+      <div class="item" v-for="x in items">
+        <div class="field_id">
+          <div>{{ x.id }}</div>
         </div>
-      </el-main>
-    </el-container>
-  </el-container>
+        <div class="content">
+          <div style="">
+            <div class="filename">{{ x.caption || x.filename }}</div>
+          </div>
+          <div>
+            <el-progress style="width: 100%;" :text-inside="true" :stroke-width="18"
+              :percentage="new Number(x.progress.toFixed(2))" />
+          </div>
+          <div style="">
+            <div class="date">{{ x.createTime }}</div>
+            <div>{{ filesize(x.downloadBytePerSec) }}/s </div>
+            <div class="size">
+              <div v-if="x.downloadedSize != x.fileSize">{{ filesize(x.downloadedSize) }}/</div> {{
+        filesize(x.fileSize)
+      }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 
 
 </template>
@@ -87,7 +82,7 @@ function filesize(size) {
 .item {
   display: flex;
   border: 1px dotted gray;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
   padding: 0.5rem;
   border-radius: 0.5 rem;
 }
@@ -122,9 +117,15 @@ function filesize(size) {
 
 @media (min-width: 1024px) {
 
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
+  .main {
+    display: flex;
+  }
+}
+
+@media (max-width: 1023px) {
+  .main {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
