@@ -84,18 +84,17 @@ function filesize(size) {
   border: 1px dotted gray;
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border-radius: 0.5 rem;
+  border-radius: 0.5rem;
 }
 
 .size {
   display: flex;
-  width: 10rem;
-  margin: 0 1rem;
+  margin: 0 0.3rem;
 }
 
 .field_id {
   color: orangered;
-  width: 5rem;
+  width: 3rem;
 
 }
 
@@ -123,6 +122,11 @@ function filesize(size) {
 }
 
 @media (max-width: 1023px) {
+
+  .date {
+    display: none;
+  }
+
   .main {
     display: flex;
     flex-direction: column;
